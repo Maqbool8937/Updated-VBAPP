@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:label="vagrancy_beggars"
+        android:label="Vagrancy Beggars"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
