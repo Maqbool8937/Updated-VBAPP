@@ -11,9 +11,13 @@ class BiometricCaptureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(BiometricController());
 
-    return Scaffold(
-      backgroundColor: Colors.white,
+    final bg = Theme.of(context).scaffoldBackgroundColor;
+    final cardColor = Theme.of(context).cardColor;
+    final textColor = Theme.of(context).textTheme.bodyMedium!.color;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
+    return Scaffold(
+      backgroundColor: bg,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Obx(() {
@@ -22,48 +26,68 @@ class BiometricCaptureScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 30),
 
+              /// ----------------- Step Header -----------------
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Text(
                     "Step 1 of 4",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
                   ),
                   Text(
                     "20%",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
 
-              // Progress bar
+              /// ----------------- Progress Bar -----------------
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: LinearProgressIndicator(
                   value: 0.2,
-                  backgroundColor: Colors.grey[300],
+                  backgroundColor: isDark ? Colors.white12 : Colors.grey[300],
                   color: Colors.redAccent,
                   minHeight: 6,
                 ),
               ),
+
               const SizedBox(height: 10),
-              const Text(
+
+              Text(
                 "Biometric Capture",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
+                ),
               ),
+
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 "We need to capture your biometric data for secure identification.",
-                style: TextStyle(color: Colors.black54, fontSize: 15),
+                style: TextStyle(
+                  color: textColor!.withOpacity(0.6),
+                  fontSize: 15,
+                ),
               ),
+
               const SizedBox(height: 20),
 
-              // Face Detection Card
+              /// ----------------- Face Detection Card -----------------
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF8F8F8),
+                  color: cardColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -75,17 +99,21 @@ class BiometricCaptureScreen extends StatelessWidget {
                           height: 180,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.06),
+                            color: isDark
+                                ? Colors.white10
+                                : Colors.black.withOpacity(0.06),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: CustomPaint(painter: _FaceOutlinePainter()),
                         ),
+
                         if (controller.isScanningFace.value)
                           Lottie.asset(
                             'assets/scan_animation.json',
                             width: 120,
                             repeat: true,
                           ),
+
                         if (controller.isFaceDetected.value)
                           const Icon(
                             Icons.verified,
@@ -94,13 +122,18 @@ class BiometricCaptureScreen extends StatelessWidget {
                           ),
                       ],
                     ),
+
                     const SizedBox(height: 10),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Face Detection",
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: textColor,
+                          ),
                         ),
                         Text(
                           controller.isScanningFace.value
@@ -116,12 +149,19 @@ class BiometricCaptureScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     const SizedBox(height: 6),
-                    const Text(
+
+                    Text(
                       "Position your face within the outline and look directly at the camera.",
-                      style: TextStyle(color: Colors.black54, fontSize: 13),
+                      style: TextStyle(
+                        color: textColor.withOpacity(0.6),
+                        fontSize: 13,
+                      ),
                     ),
+
                     const SizedBox(height: 12),
+
                     ElevatedButton(
                       onPressed: controller.startFaceScan,
                       style: ElevatedButton.styleFrom(
@@ -138,12 +178,12 @@ class BiometricCaptureScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Thumb Scan Section
+              /// ----------------- Thumb Scanner -----------------
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF8F8F8),
+                  color: cardColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -154,7 +194,7 @@ class BiometricCaptureScreen extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isDark ? Colors.white10 : Colors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: controller.isThumbScanned.value
@@ -164,17 +204,19 @@ class BiometricCaptureScreen extends StatelessWidget {
                                 size: 50,
                               )
                             : Column(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.fingerprint,
-                                    color: Colors.grey,
+                                    color: isDark
+                                        ? Colors.white70
+                                        : Colors.grey,
                                     size: 50,
                                   ),
-                                  SizedBox(height: 8),
+                                  const SizedBox(height: 8),
                                   Text(
                                     "Tap to scan your thumb",
                                     style: TextStyle(
-                                      color: Colors.black54,
+                                      color: textColor.withOpacity(0.6),
                                       fontSize: 14,
                                     ),
                                   ),
@@ -182,32 +224,44 @@ class BiometricCaptureScreen extends StatelessWidget {
                               ),
                       ),
                     ),
-                    const SizedBox(height: 8),
                   ],
                 ),
               ),
+
               const SizedBox(height: 10),
-              const Text(
+
+              Text(
                 "Place your thumb on the scanner when prompted.",
-                style: TextStyle(color: Colors.black54, fontSize: 13),
+                style: TextStyle(
+                  color: textColor.withOpacity(0.6),
+                  fontSize: 13,
+                ),
               ),
+
               const SizedBox(height: 20),
 
-              // Info
+              /// ----------------- Info Box -----------------
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3F4F6),
+                  color: isDark ? Colors.white10 : const Color(0xFFF3F4F6),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
-                  children: const [
-                    Icon(Icons.lock_outline, color: Colors.black54, size: 18),
-                    SizedBox(width: 10),
+                  children: [
+                    Icon(
+                      Icons.lock_outline,
+                      color: textColor.withOpacity(0.6),
+                      size: 18,
+                    ),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Text(
                         "Your biometric data is securely encrypted and will only be used for authentication purposes.",
-                        style: TextStyle(color: Colors.black54, fontSize: 12.5),
+                        style: TextStyle(
+                          color: textColor.withOpacity(0.7),
+                          fontSize: 12.5,
+                        ),
                       ),
                     ),
                   ],
@@ -216,14 +270,12 @@ class BiometricCaptureScreen extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              // Continue Button
+              /// ----------------- Continue Button -----------------
               SizedBox(
                 width: double.infinity,
                 height: 55,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => PersonalInformationScreen());
-                  },
+                  onPressed: () => Get.to(() => PersonalInformationScreen()),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF140D44),
                     shape: RoundedRectangleBorder(
