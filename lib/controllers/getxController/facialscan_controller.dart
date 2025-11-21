@@ -21,15 +21,52 @@ class FacialScanController extends GetxController {
     initializeCamera();
   }
 
-  Future<void> initializeCamera() async {
+ 
+
+Future<void> initializeCamera() async {
+  try {
+    // Dispose previous controller (if exists)
+    cameraController?.dispose();   // <-- Null-safely dispose
+
+    // Fetch available cameras
     final cameras = await availableCameras();
-    final frontCamera = cameras.firstWhere(
-      (cam) => cam.lensDirection == CameraLensDirection.front,
+
+    if (cameras.isEmpty) {
+      debugPrint("No cameras available on this device.");
+      return;
+    }
+
+    // Select back camera, fallback to first available
+    final backCamera = cameras.firstWhere(
+      (cam) => cam.lensDirection == CameraLensDirection.back,
+      orElse: () {
+        debugPrint("Back camera not found. Using first available camera.");
+        return cameras.first;
+      },
     );
-    cameraController = CameraController(frontCamera, ResolutionPreset.medium);
+
+    // Create controller
+    cameraController = CameraController(
+      backCamera,
+      ResolutionPreset.medium,
+      enableAudio: false,
+    );
+
+    // Initialize camera
     await cameraController!.initialize();
+
+    // Mark initialization complete
     isCameraInitialized.value = true;
+
+    debugPrint("Back camera initialized successfully.");
+
+  } catch (e) {
+    debugPrint("Camera initialization failed: $e");
   }
+}
+
+
+
 
   Future<void> startFaceScan(BuildContext context) async {
     if (cameraController == null || isDetecting.value) return;

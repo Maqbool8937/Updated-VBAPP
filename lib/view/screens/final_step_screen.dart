@@ -132,7 +132,7 @@ class FinalStepScreen extends StatelessWidget {
                 // Dropdown
                 Obx(
                   () => DropdownButtonFormField<String>(
-                    value: controller.selectedShelter.value.isEmpty
+                    initialValue: controller.selectedShelter.value.isEmpty
                         ? null
                         : controller.selectedShelter.value,
                     decoration: InputDecoration(

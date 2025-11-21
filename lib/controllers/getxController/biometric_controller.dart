@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
@@ -22,7 +23,7 @@ class BiometricController extends GetxController {
   Future<void> initializeCamera() async {
     final cameras = await availableCameras();
     final frontCamera = cameras.firstWhere(
-      (cam) => cam.lensDirection == CameraLensDirection.front,
+      (cam) => cam.lensDirection == CameraLensDirection.back,
     );
     cameraController = CameraController(frontCamera, ResolutionPreset.medium);
     await cameraController!.initialize();

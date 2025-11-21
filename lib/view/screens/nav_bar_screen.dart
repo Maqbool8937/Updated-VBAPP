@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:vagrancy_beggars/controllers/getxController/bottom_nav_controller.dart';
-import 'package:vagrancy_beggars/view/screens/confirmation_screen.dart';
 import 'package:vagrancy_beggars/view/screens/nav_bar_screen/calendar_screen.dart';
-import 'package:vagrancy_beggars/view/screens/nav_bar_screen/message_scree.dart';
+import 'package:vagrancy_beggars/view/screens/nav_bar_screen/message_screen.dart';
 import 'package:vagrancy_beggars/view/screens/nav_bar_screen/search_screen.dart';
 import 'package:vagrancy_beggars/view/screens/settings_logout.dart';
 import 'home_screen.dart';

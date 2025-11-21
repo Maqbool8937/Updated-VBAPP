@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:vagrancy_beggars/controllers/getxController/biometric_controller.dart';
 import 'package:vagrancy_beggars/view/screens/personal_information_screen.dart';
+import 'package:camera/camera.dart';
+
 
 class BiometricCaptureScreen extends StatelessWidget {
   const BiometricCaptureScreen({super.key});
@@ -83,7 +85,7 @@ class BiometricCaptureScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              /// ----------------- Face Detection Card -----------------
+         //     / ----------------- Face Detection Card -----------------
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -175,6 +177,7 @@ class BiometricCaptureScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
 
               const SizedBox(height: 20),
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vagrancy_beggars/controllers/getxController/theme%20_controller.dart';
+import 'package:vagrancy_beggars/services/auth_service.dart';
+import 'package:vagrancy_beggars/view/screens/welcome_back_screen.dart';
 
 class SettingsLogout extends StatelessWidget {
   const SettingsLogout({super.key});
@@ -11,7 +13,6 @@ class SettingsLogout extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     final isDark = themeController.isDark.value;
-    final bg = Theme.of(context).scaffoldBackgroundColor;
     final cardColor = Theme.of(context).cardColor;
     final textColor = Theme.of(context).textTheme.bodyMedium!.color;
 
@@ -139,6 +140,49 @@ class SettingsLogout extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  onTap: () async {
+                    // Show confirmation dialog
+                    final shouldLogout = await Get.dialog<bool>(
+                      AlertDialog(
+                        title: const Text('Logout'),
+                        content: const Text('Are you sure you want to logout?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Get.back(result: false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => Get.back(result: true),
+                            child: const Text(
+                              'Logout',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+
+                    if (shouldLogout == true) {
+                      try {
+                        final authService = AuthService();
+                        await authService.logout();
+                        Get.offAll(() => WelcomeBackScreen());
+                        Get.snackbar(
+                          'Success',
+                          'Logged out successfully',
+                          backgroundColor: Colors.green,
+                          colorText: Colors.white,
+                        );
+                      } catch (e) {
+                        Get.snackbar(
+                          'Error',
+                          'Failed to logout: $e',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                        );
+                      }
+                    }
+                  },
                 ),
               ),
             ),

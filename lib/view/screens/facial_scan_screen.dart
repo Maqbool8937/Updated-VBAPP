@@ -22,8 +22,6 @@ class _FacialScanScreenState extends State<FacialScanScreen> {
     return Scaffold(
       body: Obx(() {
         final isDark = themeController.isDark.value;
-        final bgColor = Theme.of(context).scaffoldBackgroundColor;
-        final textColor = Theme.of(context).textTheme.bodyMedium!.color;
 
         if (!controller.isCameraInitialized.value) {
           return Center(
@@ -81,12 +79,17 @@ class _FacialScanScreenState extends State<FacialScanScreen> {
                   alignment: Alignment.center,
                   children: [
                     ClipRRect(
+
                       borderRadius: BorderRadius.circular(12),
                       child: CameraPreview(controller.cameraController!),
                     ),
                     CustomPaint(
+                      // willChange: true,
+
                       size: const Size(double.infinity, double.infinity),
-                      painter: _FaceFramePainter(isDark: isDark),
+                      painter: _FaceFramePainter(
+                        
+                        isDark: isDark),
                     ),
                   ],
                 ),

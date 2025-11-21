@@ -14,7 +14,6 @@ class PhotoLocationScreen extends StatelessWidget {
 
     final isDark = themeController.isDark.value;
     final bg = Theme.of(context).scaffoldBackgroundColor;
-    final cardColor = Theme.of(context).cardColor;
     final textColor = Theme.of(context).textTheme.bodyLarge!.color;
     final hintColor = Colors.grey;
 

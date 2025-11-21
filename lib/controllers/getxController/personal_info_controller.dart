@@ -10,9 +10,42 @@ class PersonalInfoController extends GetxController {
 
   var gender = 'male'.obs;
 
+  String? validateAge(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return null; // Age is optional
+    }
+    final age = int.tryParse(value.trim());
+    if (age == null) {
+      return 'Please enter a valid number';
+    }
+    if (age < 0 || age > 150) {
+      return 'Please enter a valid age (0-150)';
+    }
+    return null;
+  }
+
+  bool validateForm() {
+    // Age validation (optional field)
+    final ageError = validateAge(ageController.text);
+    if (ageError != null) {
+      Get.snackbar(
+        'Validation Error',
+        ageError,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return false;
+    }
+    return true;
+  }
+
   // Example function to handle Continue
   void onContinue() {
-    // You can store or validate data here
+    if (!validateForm()) {
+      return;
+    }
+
+    // Store validated data
     print('Name: ${nameController.text}');
     print('Gender: ${gender.value}');
     print('Age: ${ageController.text}');

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vagrancy_beggars/controllers/getxController/personal_info_controller.dart';
 import 'package:vagrancy_beggars/controllers/getxController/theme _controller.dart';
-import 'package:vagrancy_beggars/view/screens/photo_location_screen.dart';
 
 class PersonalInformationScreen extends StatelessWidget {
   const PersonalInformationScreen({Key? key}) : super(key: key);
@@ -16,7 +15,6 @@ class PersonalInformationScreen extends StatelessWidget {
       body: Obx(() {
         final isDark = themeController.isDark.value;
 
-        final bg = Theme.of(context).scaffoldBackgroundColor;
         final textColor = Theme.of(context).textTheme.bodyMedium!.color;
         final cardColor = Theme.of(context).cardColor;
         final hintColor = isDark ? Colors.grey[400] : Colors.grey[600];
@@ -115,7 +113,7 @@ class PersonalInformationScreen extends StatelessWidget {
                   Obx(() {
                     return DropdownButtonFormField<String>(
                       dropdownColor: cardColor,
-                      value: controller.gender.value,
+                      initialValue: controller.gender.value,
                       style: TextStyle(color: textColor),
                       items: const [
                         DropdownMenuItem(value: 'male', child: Text('male')),
@@ -232,32 +230,36 @@ class PersonalInformationScreen extends StatelessWidget {
                   const SizedBox(height: 30),
 
                   // CONTINUE BUTTON
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF140D44),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF140D44),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    onPressed: () {
-                      controller.onContinue();
-                      Get.to(() => PhotoLocationScreen());
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Continue",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(
-                          Icons.arrow_forward,
-                          size: 20,
-                          color: Colors.white,
-                        ),
-                      ],
+                      onPressed: () {
+                        if (controller.validateForm()) {
+                          controller.onContinue();
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Continue",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                          const SizedBox(width: 8),
+                          const Icon(
+                            Icons.arrow_forward,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
     return Obx(
       () => GetMaterialApp(
-        title: 'Theme Demo',
+        title: 'Punjab Beggars & Vagrancy Portal',
         debugShowCheckedModeBanner: false,
         themeMode: themeController.theme,
         theme: ThemeData.light(),
