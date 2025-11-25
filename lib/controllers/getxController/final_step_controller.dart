@@ -62,7 +62,8 @@ class FinalStepController extends GetxController {
       }
 
       // Get beggary type - default to Individual
-      String beggaryType = 'Individual'; // Can be: "Child", "Woman", "Disabled", "Organized Gang", "Individual"
+      String beggaryType =
+          'Individual'; // Can be: "Child", "Woman", "Disabled", "Organized Gang", "Individual"
 
       // Get age
       String? age = personalInfoController.ageController.text.trim();

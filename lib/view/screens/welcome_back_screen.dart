@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vagrancy_beggars/controllers/getxController/login_controller.dart';
+import 'package:vagrancy_beggars/view/screens/nav_bar_screen.dart';
 import 'package:vagrancy_beggars/view/widgets/custom_field.dart';
 
 class WelcomeBackScreen extends StatelessWidget {
@@ -32,8 +33,26 @@ class WelcomeBackScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: mediaQuery.height * 0.2),
-                  const Text(
+                  SizedBox(height: mediaQuery.height * 0.07),
+                  Container(
+                    height: mediaQuery.height * 0.13,
+                    width: mediaQuery.width * 0.3,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(60),
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/welcom_image.jpeg'),
+                      ),
+                    ),
+                  ),
+                  // CircleAvatar(
+                  //   radius: 50,
+                  //   backgroundImage: AssetImage(
+                  //     'assets/images/welcom_image.jpeg',
+                  //   ),
+                  // ),
+                  SizedBox(height: mediaQuery.height * 0.02),
+                  Text(
                     'Welcome Back!',
                     style: TextStyle(
                       color: Colors.white,
@@ -46,7 +65,7 @@ class WelcomeBackScreen extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   SizedBox(height: mediaQuery.height * 0.07),
-                 
+
                   const Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
@@ -110,12 +129,12 @@ class WelcomeBackScreen extends StatelessWidget {
                         width: double.infinity,
                         height: 55,
                         child: ElevatedButton(
-                          // onPressed:(){
-                          //  Get.off(()=>MainNavScreen());
-                          // }, 
-                          onPressed: controller.isLoading.value
-                              ? null
-                              : controller.login,
+                          onPressed: () {
+                            Get.off(() => MainNavScreen());
+                          },
+                          // onPressed: controller.isLoading.value
+                          //     ? null
+                          //     : controller.login,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xffED1C24),
                             shape: RoundedRectangleBorder(
@@ -143,7 +162,7 @@ class WelcomeBackScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: const [Dot(), SizedBox(width: 10), Dot()],
                   ),
-                //  SizedBox(height: mediaQuery.height * 0.05),
+                  //  SizedBox(height: mediaQuery.height * 0.05),
                 ],
               ),
             ),
@@ -169,6 +188,3 @@ class Dot extends StatelessWidget {
     );
   }
 }
-
-
-

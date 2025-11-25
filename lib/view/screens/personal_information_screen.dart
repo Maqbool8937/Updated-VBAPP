@@ -25,7 +25,7 @@ class PersonalInformationScreen extends StatelessWidget {
         return SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -66,7 +66,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 20),
 
                   Text(
                     "Personal Information",
@@ -77,7 +77,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
 
                   _label("Name (if known)", textColor),
                   const SizedBox(height: 10),
@@ -104,7 +104,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
 
                   _label("Gender", textColor),
                   const SizedBox(height: 10),
@@ -143,8 +143,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     );
                   }),
 
-                  const SizedBox(height: 20),
-
+                  const SizedBox(height: 15),
                   _label("Estimated Age", textColor),
                   const SizedBox(height: 10),
 
@@ -171,7 +170,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
 
                   _label("Clothing Description", textColor),
                   const SizedBox(height: 10),
@@ -199,7 +198,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
 
                   _label("Behavioral Notes", textColor),
                   const SizedBox(height: 10),
@@ -263,7 +262,7 @@ class PersonalInformationScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                 ],
               ),
             ),

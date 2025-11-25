@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vagrancy_beggars/controllers/getxController/photo_location_controller.dart';
 import 'package:vagrancy_beggars/controllers/getxController/theme _controller.dart';
+import 'package:vagrancy_beggars/services/get_live_location.dart';
+
+import '../../services/get_live_location.dart';
 
 class PhotoLocationScreen extends StatelessWidget {
   const PhotoLocationScreen({super.key});
@@ -11,6 +14,7 @@ class PhotoLocationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(PhotoLocationController());
     final themeController = Get.find<ThemeController>();
+    final controllr = Get.put(PhotoLocationController());
 
     final isDark = themeController.isDark.value;
     final bg = Theme.of(context).scaffoldBackgroundColor;
@@ -215,17 +219,23 @@ class PhotoLocationScreen extends StatelessWidget {
                             style: TextStyle(fontSize: 14, color: textColor),
                           ),
                         ),
-                        TextButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.edit,
-                            size: 16,
-                            color: Colors.blue,
-                          ),
-                          label: const Text(
-                            "Edit",
-                            style: TextStyle(color: Colors.blue),
-                          ),
+                        // TextButton.icon(
+                        //   onPressed: () {},
+                        //   icon: const Icon(
+                        //     Icons.edit,
+                        //     size: 16,
+                        //     color: Colors.blue,
+                        //   ),
+                        //   label: const Text(
+                        //     "Edit",
+                        //     style: TextStyle(color: Colors.blue),
+                        //   ),
+                        // ),
+                        IconButton(
+                          icon: Icon(Icons.edit_location_alt),
+                          onPressed: () {
+                            controller.getLiveLocation();
+                          },
                         ),
                       ],
                     ),

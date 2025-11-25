@@ -74,6 +74,9 @@ class ApiConfig {
   static const String getCurrentUser = '/auth/me';
   static const String forgotPassword = '/auth/forgot-password';
 
+  // Change Password:
+  static const String changePassword = '/auth/change-password';
+
   // Beggar Record Endpoints (Main Functionality)
   static const String submitBeggarRecord = '/beggars/add';
   static const String getMyRecords = '/beggars/all';

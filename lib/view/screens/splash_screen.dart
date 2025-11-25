@@ -24,35 +24,14 @@ class SplashScreen extends StatelessWidget {
             children: [
               SizedBox(height: size.height * 0.2),
 
-              // 🔹 LOGO CIRCLE
-              // Container(
-              //   width: 120,
-              //   height: 120,
-              //   decoration: BoxDecoration(
-              //     shape: BoxShape.circle,
-              //     border: Border.all(color: Colors.redAccent, width: 3),
-              //   ),
-              //   child: const Center(
-              //     child: Icon(
-              //       Icons.verified_user,
-              //       color: Colors.white,
-              //       size: 50,
-              //     ),
-              //   ),
-              // ),
-
               Container(
-                height: size.height*0.15,
-                width: size.width*0.36,
-                decoration: BoxDecoration(
-                  //color: Colors.red,
-                  //image: DecorationImage(image: AssetImage('assets/images/icon.jpeg')),
-
-                 // borderRadius: BorderRadius.circular(50)
+                height: size.height * 0.15,
+                width: size.width * 0.36,
+                decoration: BoxDecoration(),
+                child: CircleAvatar(
+                  foregroundImage: AssetImage('assets/images/icon.jpeg'),
                 ),
-               child: CircleAvatar(foregroundImage: AssetImage('assets/images/icon.jpeg'),),
-                
-                ),
+              ),
               const SizedBox(height: 40),
 
               // 🔹 TITLE
