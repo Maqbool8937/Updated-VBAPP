@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
       height: mediaQuerySize.height * 0.07,
       width: width,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.buttonColor),
+        border: Border.all(color: Colors.grey),
         color: color,
         borderRadius: BorderRadius.circular(10),
       ),
@@ -42,7 +42,14 @@ class CustomButton extends StatelessWidget {
           ? SpinKitThreeInOut(color: AppColors.whiteColor, size: 35)
           : TextButton(
               onPressed: onTap,
-              child: Text(name, style: textStyle),
+              child: Text(
+                name,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
     );
   }

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vagrancy_beggars/controllers/getxController/mapcontroller.dart';
 import 'package:vagrancy_beggars/controllers/getxController/theme _controller.dart';
 import 'package:vagrancy_beggars/controllers/getxController/bottom_nav_controller.dart';
-import 'package:vagrancy_beggars/view/screens/action_taken-screen.dart';
-import 'package:vagrancy_beggars/view/screens/beggar_form_screen.dart';
-import 'package:vagrancy_beggars/view/screens/biometric_capture_screen.dart';
-import 'package:vagrancy_beggars/view/screens/facial_scan_screen.dart';
+import 'package:vagrancy_beggars/view/screens/UpdatedScreens/addbaggersdata_screen.dart';
 import 'package:vagrancy_beggars/view/screens/assigned_cases_screen.dart';
 import 'package:vagrancy_beggars/view/screens/map_screen.dart';
 
@@ -27,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         return SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: mediaQuery.height * 0.06),
+              SizedBox(height: mediaQuery.height * 0.05),
 
               // TOP HEADER
               Container(
@@ -58,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: mediaQuery.height * 0.03),
+              SizedBox(height: mediaQuery.height * 0.1),
 
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -70,24 +66,10 @@ class HomeScreen extends StatelessWidget {
                     // QUICK ACCESS ROW 1
                     _buildQuickAccessRow(
                       mediaQuery,
-                      ['Reports', 'Alerts'],
+                      ['Records', 'Alerts'],
                       isDark,
-                      [
-                        () => Get.snackbar(
-                          'Reports',
-                          'Reports feature coming soon',
-                          backgroundColor: Colors.blue,
-                          colorText: Colors.white,
-                        ),
-                        () => Get.snackbar(
-                          'Alerts',
-                          'Alerts feature coming soon',
-                          backgroundColor: Colors.orange,
-                          colorText: Colors.white,
-                        ),
-                      ],
+                      [() => Get.to(() => const AssignedCasesScreen())],
                     ),
-
                     SizedBox(height: mediaQuery.height * 0.02),
 
                     // QUICK ACCESS ROW 2
@@ -96,12 +78,6 @@ class HomeScreen extends StatelessWidget {
                       ['Map', 'Settings'],
                       isDark,
                       [
-                        // () => Get.snackbar(
-                        //   'Map',
-                        //   'Map view coming soon',
-                        //   backgroundColor: Colors.green,
-                        //   colorText: Colors.white,
-                        // ),
                         () => Get.to(() => MapScreen()),
                         () {
                           final navController = Get.find<BottomNavController>();
@@ -113,95 +89,31 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
 
-              // _buildQuickAccessRow(
-              //   mediaQuery,
-              //   ['Map', 'Settings'],
-              //   false, // isDark
-              //   [
-              //     () => Get.snackbar(
-              //       'Map',
-              //       'Map view coming soon',
-              //       backgroundColor: Colors.green,
-              //       colorText: Colors.white,
-              //     ),
-              //     () {
-              //       // Navigate to settings tab
-              //     },
-              //   ],
-              // ),
+              SizedBox(height: mediaQuery.height * 0.15),
 
-              // const SizedBox(height: 20),
-
-              // // Map container
-              // Obx(() {
-              //   if (mapController.isLoading.value) {
-              //     return const Center(child: CircularProgressIndicator());
-              //   }
-
-              //   if (mapController.currentPosition.value == null) {
-              //     return const Text("Unable to get location");
-              //   }
-
-              //   return SizedBox(
-              //     height: 250,
-              //     width: double.infinity,
-              //     child: GoogleMap(
-              //       initialCameraPosition: CameraPosition(
-              //         target: mapController.currentPosition.value!,
-              //         zoom: 16,
-              //       ),
-              //       myLocationEnabled: true,
-              //       myLocationButtonEnabled: true,
-              //       onMapCreated: (GoogleMapController controller) {
-              //         mapController.mapController = controller;
-              //       },
-              //     ),
-              //   );
-              // }),
-              SizedBox(height: mediaQuery.height * 0.05),
-
-              // ACTION BUTTONS
-              _buildActionButton(
-                mediaQuery,
-                icon: Icons.qr_code_scanner,
-                text: 'Scan Face',
-                onTap: () => Get.to(() => const FacialScanScreen()),
-                isDark: isDark,
-              ),
-
-              SizedBox(height: mediaQuery.height * 0.02),
-
-              _buildActionButton(
-                mediaQuery,
-                icon: Icons.app_registration,
-                text: 'Manual Registration',
-                onTap: () => Get.to(() => const BiometricCaptureScreen()),
-                isDark: isDark,
-              ),
-              SizedBox(height: mediaQuery.height * 0.02),
-              _buildActionButton(
-                mediaQuery,
-                icon: Icons.cases_outlined,
-                text: 'Beggars form',
-                onTap: () => Get.to(() => BeggarFormScreen()),
-                isDark: isDark,
-              ),
-              SizedBox(height: mediaQuery.height * 0.02),
-              _buildActionButton(
-                mediaQuery,
-                icon: Icons.cases_outlined,
-                text: 'Action Taken',
-                onTap: () => Get.to(() => ActionTakenScreen()),
-                isDark: isDark,
-              ),
-              SizedBox(height: mediaQuery.height * 0.02),
-
-              _buildActionButton(
-                mediaQuery,
-                icon: Icons.cases_outlined,
-                text: 'View Assigned Cases',
-                onTap: () => Get.to(() => const AssignedCasesScreen()),
-                isDark: isDark,
+              // SAVE RECORD BUTTON
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(() => AddbaggersdataScreen());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red, // button color
+                      side: BorderSide.none, // remove border
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    child: const Text(
+                      'Add New Record',
+                      style: TextStyle(
+                        color: Colors.white, // text color
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
               SizedBox(height: mediaQuery.height * 0.05),
@@ -213,45 +125,9 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ACTION BUTTON WIDGET
-Widget _buildActionButton(
-  Size mediaQuery, {
-  required IconData icon,
-  required String text,
-  required VoidCallback onTap,
-  required bool isDark,
-}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      height: mediaQuery.height * 0.09,
-      width: mediaQuery.width * 0.9,
-      decoration: BoxDecoration(
-        color: isDark ? Colors.white10 : Colors.black.withOpacity(0.07),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(icon, color: Colors.red),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 20,
-              color: isDark ? Colors.white : Colors.black,
-            ),
-          ),
-          const Icon(Icons.arrow_forward_ios),
-        ],
-      ),
-    ),
-  );
-}
-
 // QUICK ACCESS ROW WIDGET
 Widget _buildQuickAccessRow(
   Size mediaQuery,
-
   List<String> items,
   bool isDark,
   List<VoidCallback> onTapCallbacks,
@@ -292,13 +168,14 @@ Widget _buildQuickAccessRow(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 20, color: Colors.red),
-              SizedBox(height: mediaQuery.height * 0.02),
+              Icon(icon, size: 28, color: Colors.red),
+              SizedBox(height: mediaQuery.height * 0.015),
               Text(
                 item,
                 style: TextStyle(
-                  fontSize: 20,
-                  color: isDark ? Colors.white : Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: isDark ? Colors.white : Colors.black87,
                 ),
               ),
             ],
