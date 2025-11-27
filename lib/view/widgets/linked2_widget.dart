@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vagrancy_beggars/controllers/getxController/LinkedMafia_controller.dart';
-import 'package:vagrancy_beggars/controllers/getxController/gender_controller.dart';
-import 'package:vagrancy_beggars/controllers/getxController/langauage_dropdown_controller.dart';
+
 import 'package:vagrancy_beggars/controllers/getxController/linked2_controller.dart';
 
 class Linked2Widget extends StatefulWidget {

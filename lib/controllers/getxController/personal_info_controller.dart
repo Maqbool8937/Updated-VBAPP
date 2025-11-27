@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:vagrancy_beggars/view/screens/photo_location_screen.dart';
 
 class PersonalInfoController extends GetxController {
   final nameController = TextEditingController();
@@ -51,9 +50,6 @@ class PersonalInfoController extends GetxController {
     print('Age: ${ageController.text}');
     print('Clothing: ${clothingController.text}');
     print('Notes: ${notesController.text}');
-
-    // Navigate to next screen (Step 3)
-    Get.to(() => PhotoLocationScreen());
   }
 
   @override

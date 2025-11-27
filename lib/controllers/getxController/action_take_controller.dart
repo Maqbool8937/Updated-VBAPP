@@ -43,35 +43,3 @@ class ActionTakController extends GetxController {
     }
   }
 }
-
-// import 'package:get/get.dart';
-
-// class ActionTakController extends GetxController {
-//   final selectedLanguage = "Select action type".obs;
-
-//   // FIR fields visibility
-//   var showFIRFields = false.obs;
-
-//   // FIR input values
-//   var firNumber = "".obs;
-//   var policeStation = "".obs;
-
-//   final List<String> languages = [
-//     "FIR",
-//     "Taken to Edhi/NGO",
-//     "Child Protection Bureau",
-//     "Beggars Home/ Social Welfare",
-//   ];
-
-//   void changeLanguage(String lang) {
-//     selectedLanguage.value = lang;
-
-//     if (lang == "FIR") {
-//       showFIRFields.value = true;
-//     } else {
-//       showFIRFields.value = false;
-//       firNumber.value = "";
-//       policeStation.value = "";
-//     }
-//   }
-// }

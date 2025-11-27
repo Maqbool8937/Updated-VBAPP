@@ -4,7 +4,6 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:vagrancy_beggars/controllers/getxController/theme _controller.dart';
 import 'package:vagrancy_beggars/controllers/utils/app_translations.dart';
-import 'package:vagrancy_beggars/view/screens/beggar_form_screen.dart';
 import 'package:vagrancy_beggars/view/screens/splash_screen.dart';
 import 'controllers/getxController/language_controller.dart';
 
