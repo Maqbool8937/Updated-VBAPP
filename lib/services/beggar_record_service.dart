@@ -12,30 +12,32 @@ class BeggarRecordService {
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiConfig.baseUrl,
-        connectTimeout: const Duration(seconds: 300), // 5 minutes for file uploads
+        connectTimeout: const Duration(
+          seconds: 300,
+        ), // 5 minutes for file uploads
         receiveTimeout: const Duration(seconds: 300),
         sendTimeout: const Duration(seconds: 300),
       ),
     );
 
     // Add auth interceptor
-    _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) async {
-        final prefs = await SharedPreferences.getInstance();
-        final token = prefs.getString('token');
-        if (token != null) {
-          options.headers['Authorization'] = 'Bearer $token';
-        }
-        return handler.next(options);
-      },
-    ));
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final prefs = await SharedPreferences.getInstance();
+          final token = prefs.getString('token');
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          return handler.next(options);
+        },
+      ),
+    );
 
     if (kDebugMode) {
-      _dio.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        error: true,
-      ));
+      _dio.interceptors.add(
+        LogInterceptor(requestBody: true, responseBody: true, error: true),
+      );
     }
   }
 
@@ -146,9 +148,7 @@ class BeggarRecordService {
       if (response.statusCode == 200) {
         final data = response.data;
         if (data is List) {
-          return data
-              .map((json) => BeggarRecord.fromJson(json))
-              .toList();
+          return data.map((json) => BeggarRecord.fromJson(json)).toList();
         }
         return [];
       } else {
@@ -294,4 +294,3 @@ class BeggarRecordService {
     }
   }
 }
-

@@ -189,6 +189,3 @@ class _ActionTakenWidgetState extends State<ActionTakenWidget> {
     );
   }
 }
-
-
-
